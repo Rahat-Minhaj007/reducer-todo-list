@@ -1,0 +1,35 @@
+.home {
+  background-color: rgb(122, 192, 233);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+.toDo-field input[type="text"] {
+  height: 60px;
+  border: none;
+  outline: none;
+  width: 350px;
+  padding: 25px 10px;
+ 
+  font-weight: bold;
+}
+.toDo-field input[type="submit"] {
+  height: 60px;
+  border: none;
+  outline: none;
+  width: 48px;
+  background-color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .toDo-field input[type="text"] {
+    width: 250px;
+  }
+  .toDo-field input[type="submit"] {
+    width: 32px;
+  }
+}

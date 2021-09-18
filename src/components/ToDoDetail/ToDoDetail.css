@@ -1,0 +1,8 @@
+.toDoDetail {
+  width: 25rem;
+}
+@media only screen and (max-width: 768px) {
+  .toDoDetail {
+    width: 18rem;
+  }
+}
