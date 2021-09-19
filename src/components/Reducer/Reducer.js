@@ -2,26 +2,18 @@ export const initialToDoState = {
     toDoList: []
 }
 
+
 export const toDoReducer = (state, action) => {
     switch (action.type) {
         case "ADD":
-            const newToDo = {
-                id: action.id,
-                name: action.name,
-                completed: action.completed
-            };
-            const allToDoList = [...state.toDoList, newToDo];
-            return { toDoList: allToDoList };
+            return { ...state, toDoList: [...state.toDoList, action.payload] };
+
         case "REMOVE":
-            const afterRemoveTODoList = state.toDoList?.filter((rm) => rm.id !== action.id);
-            return { toDoList: afterRemoveTODoList };
+            return { ...state, toDoList: state.toDoList?.filter((todo) => todo.id !== action.payload) };
+
         case "COMPLETED":
-            return state.toDoList?.map((t) => {
-                if (t.id === action.id) {
-                    return { ...t, completed: !t.completed };
-                }
-                return t;
-            });
+            return { ...state, toDoList: state.toDoList?.map((todo) => todo.id === action.payload ? { ...todo, completed: true } : todo) }
+
         default:
             return state;
     }

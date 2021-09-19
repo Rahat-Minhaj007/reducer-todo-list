@@ -1,21 +1,32 @@
-import React, { useReducer, useState } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
 import { initialToDoState, toDoReducer } from '../Reducer/Reducer';
 import ToDoDetail from '../ToDoDetail/ToDoDetail';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt } from '@fortawesome/free-regular-svg-icons';
 import './Home.css';
+import { randomId } from '../Utilities/Utilities';
+import { ToDoContext } from '../Context/Context';
+
+
 
 const Home = () => {
-    const [state, dispatch] = useReducer(toDoReducer, initialToDoState);
+    const { state, dispatch } = useContext(ToDoContext);
     const [inputValue, setInputValue] = useState('');
 
 
-    const handleAdd = () => {
-        dispatch({
-            type: 'ADD',
-            id: state.toDoList.length + 1,
+    const handleAdd = (e) => {
+        e.preventDefault();
+
+        const newToDo = {
+            id: randomId(),
             name: inputValue,
             completed: false
+        };
+
+
+        dispatch({
+            type: 'ADD',
+            payload: newToDo
         })
         setInputValue('');
     }
@@ -23,21 +34,16 @@ const Home = () => {
     const handleRemove = (id) => {
         dispatch({
             type: 'REMOVE',
-            id: id
+            payload: id
         })
     }
     const handleCompleted = (id) => {
         dispatch({
             type: 'COMPLETED',
-            id: id
+            payload: id
         })
     }
-    // const handleKeypress = e => {
 
-    //     if (e.keyCode === 13) {
-    //         handleAdd();
-    //     }
-    // };
 
     return (
         <div className="home">
@@ -46,21 +52,20 @@ const Home = () => {
                 <div className="toDo-field pt-3">
 
                     <div className="text-center">
-                        <input
-                            type="text"
-                            placeholder="Enter Your Task"
-                            onChange={(e) => setInputValue(e.target.value)}
-                            value={inputValue}
-                        // onKeyPress={handleKeypress}
+                        <form onSubmit={handleAdd}>
+                            <input
+                                type="text"
+                                placeholder="Enter Your Task"
+                                onChange={(e) => setInputValue(e.target.value)}
+                                value={inputValue}
 
+                            />
+                            <input
+                                type="submit"
+                                value="+"
 
-                        />
-                        <input
-                            type="submit"
-                            value="+"
-                            onClick={() => handleAdd()}
-
-                        />
+                            />
+                        </form>
                     </div>
 
 

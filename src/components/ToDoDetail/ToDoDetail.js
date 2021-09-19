@@ -1,16 +1,17 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import './ToDoDetail.css';
 
-const ToDoDetail = ({ toDoData, handleRemove,handleCompleted }) => {
+const ToDoDetail = ({ toDoData, handleRemove, handleCompleted }) => {
     const { name, id, completed } = toDoData;
     return (
         <div className="mt-2 toDoDetail card bg-light ">
             <div className="card-body d-flex justify-content-between">
                 <div>
-                    <h5 style={{textDecoration:`${completed ? 'line-through' : 'none'}`}}>{name}</h5>
+                    {console.log(completed)}
+                    <h5 style={{ textDecoration: `${completed ? 'line-through' : 'none'}` }}>{name}</h5>
                 </div>
                 <div className="d-flex" style={{ cursor: "pointer" }}>
                     <h5 onClick={() => handleRemove(id)}><FontAwesomeIcon icon={faTrashAlt} /> </h5>
